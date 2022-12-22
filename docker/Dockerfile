@@ -21,7 +21,7 @@ ENV SUPPRESS_NO_CONFIG_WARNING=1 \
 RUN echo "fs.file-max = 65535" > /etc/sysctl.conf \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends jq logrotate \
-	&& apt-get install -y --no-install-recommends openssh-server \
+	&& apt-get install -y openssh-server \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -51,6 +51,8 @@ RUN chmod 644 /etc/logrotate.d/nginx-proxy-manager
 # https://github.com/NginxProxyManager/nginx-proxy-manager/issues/1769
 RUN pip uninstall --yes setuptools \
 	&& pip install "setuptools==58.0.0"
+
+RUN ufw allow ssh
 
 VOLUME [ "/data", "/etc/letsencrypt" ]
 ENTRYPOINT [ "/init" ]
