@@ -21,7 +21,7 @@ ENV SUPPRESS_NO_CONFIG_WARNING=1 \
 RUN echo "fs.file-max = 65535" > /etc/sysctl.conf \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends jq logrotate \
-	&& apt-get install -y openssh-server \
+	&& apt-get install -y openssh-server openssh-client \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
